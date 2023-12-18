@@ -1,95 +1,65 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+
+import styles from '@/styles/page.module.css';
+import { useState } from 'react';
+import api from '@/services/api';
 
 export default function Home() {
+  const [input, setInput] = useState('');
+  const [cep, setCep] = useState({});
+
+  async function handleSearch() {
+    if (input === '') {
+      alert('Insira algum CEP!');
+      return;
+    }
+
+    try {
+      const response = await api.get(`${input}/json`);
+      setCep(response.data);
+      setInput('');
+    } catch {
+      alert('Erro ao buscar! CEP inexistente');
+      setInput('');
+    }
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Buscar CEP</h1>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+      <div className={styles.containerInput}>
+        <input
+          type='text'
+          placeholder='Insira seu CEP'
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
         />
+
+        <button className={styles.buttonSearch} onClick={handleSearch}>
+          Procurar
+        </button>
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
+      {Object.keys(cep).length > 0 && (
+        <main className={styles.main}>
+          <h2>CEP: {cep.cep}</h2>
           <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            <span>Rua:</span> {cep.logradouro}
           </p>
-        </a>
-      </div>
-    </main>
-  )
+          <p>
+            <span>Complemento:</span> {cep.complemento}
+          </p>
+          <p>
+            <span>Bairro:</span> {cep.bairro}
+          </p>
+          <p>
+            <span>Cidade - UF:</span> {cep.localidade} - {cep.uf}
+          </p>
+        </main>
+      )}
+    </div>
+  );
 }

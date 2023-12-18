@@ -1,0 +1,76 @@
+.container {
+  background: linear-gradient(54deg, #2C2276 34.45%, #1D378A 72%, #164194 88.89%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container .title {
+  font-size: 85px;
+  color: #FFF;
+}
+
+.container .containerInput {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  margin: 34px 0;
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.container .containerInput input {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  color: #FFF;
+  outline: 0;
+  margin-right: 8px;
+}
+
+.container .containerInput input::placeholder {
+  color: #F1F1F1;
+}
+
+.container .containerInput .buttonSearch {
+  background: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.container .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #FFF;
+  width: 500px;
+  border-radius: 8px;
+}
+
+.container .main h2 {
+  margin: 16px 0;
+  font-size: 40px;
+  color: #2C2276;
+  font-weight: 800;
+}
+
+.container .main p {
+  margin-bottom: 16px;
+  font-weight: 400;
+  color: #3E3E3E;
+}
+
+.container .main span {
+  font-weight: 900;
+}
