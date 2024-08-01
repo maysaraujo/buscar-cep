@@ -74,3 +74,13 @@
 .container .main span {
   font-weight: 900;
 }
+
+@media (max-width: 600px) {
+  .container .title {
+    font-size: 3.125rem;
+  }
+
+  .container .containerInput input {
+    font-size: 0.875rem;
+  }
+}
