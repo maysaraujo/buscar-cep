@@ -15,10 +15,10 @@ Para rodar o repositório é necessário clonar o mesmo e dar os seguintes coman
 
 ```
 Clone esse repositório
-$ git clone https://github.com/maysaraujo/controle-financeiro-react.git
+$ git clone https://github.com/maysaraujo/buscar-cep.git
 
 Entre na pasta
-$ cd controle-financeiro-react
+$ cd buscar-cep
 
 Instale as dependências
 $ npm install
